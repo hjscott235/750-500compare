@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Swipe between maps</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+    body {
+        overflow: hidden;
+    }
+
+    body * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .map-overlay1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 1);
+        text-align: center;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+        border-radius: 5px;
+        }
+    .map-overlay2 {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 1);
+        text-align: center;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+        border-radius: 5px;
+        }
+    #features {
+        height: 80px;
+        margin-top: 5px;
+        width: 250px;
+        }
+
+    .map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
+<div id="comparison-container">
+    <div id="before" class="map"></div>
+    <div id="after" class="map"></div>
+
+<div class="map-overlay1" id="features">
+    <h2>750m buffer</h2>
+</div>
+<div class="map-overlay2" id="features">
+    <h2>500m buffer</h2>
+</div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaGpzY290dDIzNSIsImEiOiJja20zdjVtejkwajR6MnZvMjV1aG03dW14In0.wxYmD-iFBTyoJjDBYZq8Rw';
+    var beforeMap = new mapboxgl.Map({
+        container: 'before',
+        style: 'mapbox://styles/hjscott235/ckp72qu9k0vz517t0mlxghjz7',
+        center: [-0.54328,51.42603],
+        zoom: 13,
+        hash: true
+    });
+
+    var afterMap = new mapboxgl.Map({
+        container: 'after',
+        style: 'mapbox://styles/hjscott235/ckp759dv20okt18loi8iu5j45',
+        center: [-0.54328,51.42603],
+        zoom: 13,
+        hash: true
+    });
+
+    // A selector or reference to HTML element
+    var container = '#comparison-container';
+    
+    var map = new mapboxgl.Compare(beforeMap, afterMap, container, {
+        // Set this to enable comparing two maps by mouse movement:
+        // mousemove: true
+        hash: true 
+    });
+</script>
+
+</body>
+</html>
